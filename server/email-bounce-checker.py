@@ -121,7 +121,7 @@ if __name__ == '__main__':
 
 
     print "Please enter the password:"
-    password = "08pW1yP8TWQTo" #getpass.getpass()
+    password = getpass.getpass()
 
     try:
         rv, data = mailbox.login(EMAIL_ADDRESS, password)
