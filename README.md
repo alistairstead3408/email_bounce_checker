@@ -1,33 +1,8 @@
 # email-bounce-checker
-Tiny server for checking the email bounce email and making requests to isaac-api to update users.
+Script to scan the rutherford bounces gmail account to check for DSN emails. Outputs a list of comma separated emails which are determined by:
 
-## Installation / Setup instructions
--
+1. Whether the email has a valid X-Failed-Recipients field
+2. Whether the MIME type of the email is DSN
+3. If the email contains text that matches some given phrases
 
-Your server should be running on port `http://localhost:9090/check`
-
-### Production
-Deploy to dockerhub: `docker push ucamcldtg/email-bounce-checker`
-
-The Docker container is available from [dockerhub](https://registry.hub.docker.com/u/ucamcldtg/email-bounce-checker/) by running: docker pull ucamcldtg/email-bounce-checker . This is useful for production use.
-
-### isaac-dev
-
-The following commands (as root) got it working. The `PYTHONUNBUFFERED` stuff is to make sure stdout is captured properly in logs.
-
-```
-docker pull ucamcldtg/email-bounce-checker
-docker run -d -p 5000:5000 -e PYTHONUNBUFFERED=0 --name email-bounce-checker ucamcldtg/email-bounce-checker
-```
-
-To see live output:
-
-```
-docker logs -f email-bounce-checker
-```
-
-Before pulling new version:
-
-```
-docker rm email-bounce-checker
-```
+In cases 2 and 3, the most frequently mentioned email is selected. 
